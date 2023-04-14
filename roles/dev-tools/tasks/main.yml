@@ -1,0 +1,55 @@
+---
+- name: Install development tools
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Install OpenJDK
+      apt:
+        name: openjdk-11-jdk
+        state: present
+
+    - name: Install Maven
+      apt:
+        name: maven
+        state: present
+
+    - name: Download IntelliJ IDEA
+      get_url:
+        url: "https://download.jetbrains.com/idea/ideaIC-2021.3.1.tar.gz"
+        dest: "/tmp/idea.tar.gz"
+
+    - name: Extract IntelliJ IDEA
+      unarchive:
+        src: "/tmp/idea.tar.gz"
+        dest: "/opt/"
+        remote_src: yes
+        creates: "/opt/idea-IC-213.5744.279/bin/idea.sh"
+
+    - name: Create IntelliJ IDEA desktop shortcut
+      copy:
+        dest: "/home/{{ ansible_user }}/Desktop/IntelliJ IDEA.desktop"
+        content: |
+          [Desktop Entry]
+          Version=1.0
+          Type=Application
+          Name=IntelliJ IDEA
+          Comment=IntelliJ IDEA IDE
+          Icon=/opt/idea-IC-213.5744.279/bin/idea.png
+          Exec=/opt/idea-IC-213.5744.279/bin/idea.sh
+          Terminal=false
+          Categories=Development;IDE;
