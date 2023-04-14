@@ -1,0 +1,5 @@
+- name: Setup the software on a local machine for a new developer
+  hosts: all
+  become: yes
+  roles:
+    - dev-tools

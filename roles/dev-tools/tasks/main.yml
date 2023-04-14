@@ -1,9 +1,6 @@
----
-- name: Install development tools
-  hosts: all
-  become: true
-
-  tasks:
+#- name: Install development tools
+#  hosts: all
+#  become: true
     - name: Update apt cache
       apt:
         update_cache: yes
