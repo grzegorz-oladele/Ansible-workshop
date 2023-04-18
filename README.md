@@ -18,7 +18,9 @@ The playbook will include the installation of:
 1. You need to swap values of ansible_host, ansible_ssh_pass and ansible_sudo_pass in inventory file.\
 Inventory file is encrypted. You need to decrypt using command: `ansible-vault decrypt inventory` and you need to add ansible vault password **ansible**\
 _If you aren't in the same folder as inventory file, you need specify the absolute path to the file_\
-_**EXAMPLE** (if you are in roles directory)_ `ansible-vault decrypt ../inventory`
+_**EXAMPLE** (if you are in roles directory)_ `ansible-vault decrypt ../inventory`\
+**!!WARNING!! Inventory file must always be protected. Before making a commit, don't forget to encrypt the inventory file**
+_**EXAMPLE** `ansible-vault encrypt inventory` and you will need to enter two times encrypt password
 
 
 2. You need to swap **ansible_user** value in **roles/dev-tools/vars/main.yml** file
